@@ -45,20 +45,47 @@ fun CommandButtons() {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Button(onClick = { sendCommand("SHUTDOWN",userName) }) {
+
+        Spacer(modifier = Modifier.height(16.dp)) // Отступ между группами кнопок
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(onClick = { sendCommand("PREVIOUS_SONG", userName) }) {
+                Text("Previous")
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Button(onClick = { sendCommand("PAUSE_PLAY", userName) }) {
+                Text("Play|Pause")
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Button(onClick = { sendCommand("NEXT_SONG", userName) }) {
+                Text("Next")
+            }
+        }
+
+        Button(onClick = { sendCommand("SHUTDOWN", userName) }) {
             Text("Выключить ПК")
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { sendCommand("SLEEP",userName) }) {
+        Button(onClick = { sendCommand("SLEEP", userName) }) {
             Text("Спящий режим")
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { sendCommand("REBOOT",userName) }) {
+        Button(onClick = { sendCommand("REBOOT", userName) }) {
             Text("Перезагрузка")
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { sendCommand("IDEA",userName) }) {
+        Button(onClick = { sendCommand("IDEA", userName) }) {
             Text("Запустить IntelliJ IDEA")
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = { sendCommand("NEXT_SONG", userName) }) {
+            Text("Следующая песня в Spotify")
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = { sendCommand("PREVIOUS_SONG", userName) }) {
+            Text("Предыдущая песня в Spotify")
         }
     }
 }
@@ -66,7 +93,7 @@ fun CommandButtons() {
 // Функция для отправки команды
 fun sendCommand(command: String, userName: String) {
     Thread {
-        connectToPC("192.168.0.103", 12345, command, userName)
+        connectToPC("192.168.0.103", 11, command, userName)
     }.start()
 }
 
